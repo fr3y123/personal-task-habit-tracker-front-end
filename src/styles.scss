@@ -1,1 +1,65 @@
 /* You can add global styles to this file, and also import other style files */
+
+// _variables.scss
+$primary: #3498db;
+$secondary: #2ecc71;
+$dark: #2c3e50;
+$light: #ecf0f1;
+
+// Bootstrap overrides
+$theme-colors: (
+  "primary": $primary,
+  "secondary": $secondary,
+);
+
+// Import Bootstrap
+@use "bootstrap" as *;
+
+// Mobile First Approach
+.sidebar-mobile {
+  // Default mobile state: hidden off-screen
+  position: fixed;
+  left: -100%;
+  width: 100%;
+  height: 100vh;
+  z-index: 1000;
+  transition: left 0.3s ease;
+
+  // Active state (visible)
+  &.active {
+    left: 0;
+  }
+}
+
+// Desktop Sidebar (your existing version)
+.sidebar-desktop {
+  height: 100vh;
+  position: sticky;
+  top: 0;
+}
+
+.main-content {
+  // For mobile-first: full width until md breakpoint
+  width: 100vw;
+  min-height: 100vh;
+  margin-left: 0;
+  transition: margin-left 0.3s ease;
+
+  // For desktop (md and up)
+  @media (min-width: 768px) {
+    width: auto;
+  }
+}
+
+// Mobile toggle button
+.sidebar-toggle {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 1001;
+  display: block;
+
+  @media (min-width: 768px) {
+    display: none;
+  }
+}
