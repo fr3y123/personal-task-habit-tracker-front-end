@@ -7,9 +7,52 @@
 <!-- * * * * * * * to get started with your project! * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
+<!-- app.component.html -->
 <div class="wrapper">
+  <!-- Desktop Sidebar -->
+  <nav class="sidebar" [class.collapsed]="isSidebarCollapsed">
+    <div class="sidebar-header">
+      <button class="toggle-btn" (click)="toggleSidebar()">
+        <i class="material-icons">{{
+          isSidebarCollapsed ? "chevron_right" : "chevron_left"
+        }}</i>
+      </button>
+    </div>
+    <ul class="nav-items">
+      <li
+        *ngFor="let item of navItems"
+        [routerLink]="item.path"
+        routerLinkActive="active"
+      >
+        <i class="material-icons">{{ item.icon }}</i>
+        <span class="nav-text">{{ item.label }}</span>
+      </li>
+    </ul>
+  </nav>
 
-  
+  <!-- Mobile Top Navbar -->
+  <nav class="mobile-nav">
+    <button class="mobile-toggle" (click)="toggleMobileMenu()">
+      <i class="material-icons">menu</i>
+    </button>
+    <div class="mobile-nav-items" [class.active]="isMobileMenuOpen">
+      <div
+        *ngFor="let item of navItems"
+        class="mobile-nav-item"
+        [routerLink]="item.path"
+        routerLinkActive="active"
+        (click)="closeMobileMenu()"
+      >
+        <i class="material-icons">{{ item.icon }}</i>
+        <span>{{ item.label }}</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="main-content" [class.collapsed]="isSidebarCollapsed">
+    <router-outlet></router-outlet>
+  </main>
 </div>
 
 <!-- app.component.html -->
@@ -44,7 +87,6 @@
     ></div>
   </div>
 </div> -->
-
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * The content above * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * * -->

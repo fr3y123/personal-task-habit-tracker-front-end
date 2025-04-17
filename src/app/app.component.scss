@@ -1,0 +1,137 @@
+// Variables
+$sidebar-width: 240px;
+$collapsed-width: 72px;
+$mobile-nav-height: 56px;
+
+.wrapper {
+  display: flex;
+  min-height: 100vh;
+}
+
+// Desktop Sidebar
+.sidebar {
+  width: $sidebar-width;
+  background: #2c3e50;
+  color: white;
+  transition: all 0.3s ease;
+  position: fixed;
+  height: 100vh;
+  z-index: 1000;
+
+  &.collapsed {
+    width: $collapsed-width;
+
+    .nav-text {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .toggle-btn i {
+      transform: rotate(180deg);
+    }
+  }
+
+  .sidebar-header {
+    padding: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .nav-items {
+    list-style: none;
+    padding: 0;
+
+    li {
+      padding: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      transition: background 0.3s ease;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      &.active {
+        background: #3498db;
+      }
+    }
+  }
+
+  .toggle-btn {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 0.5rem;
+  }
+}
+
+// Mobile Top Navbar
+.mobile-nav {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: #2c3e50;
+  z-index: 1001;
+  height: $mobile-nav-height;
+
+  .mobile-toggle {
+    color: white;
+    background: none;
+    border: none;
+    padding: 1rem;
+  }
+
+  .mobile-nav-items {
+    position: fixed;
+    top: $mobile-nav-height;
+    left: -100%;
+    width: 100%;
+    background: #2c3e50;
+    transition: left 0.3s ease;
+
+    &.active {
+      left: 0;
+    }
+
+    .mobile-nav-item {
+      padding: 1rem;
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+  }
+}
+
+// Main Content
+.main-content {
+  flex-grow: 1;
+  margin-left: $sidebar-width;
+  transition: margin-left 0.3s ease;
+  padding: 2rem;
+
+  &.collapsed {
+    margin-left: $collapsed-width;
+  }
+}
+
+// Responsive Handling
+@media (max-width: 767.98px) {
+  .sidebar {
+    display: none;
+  }
+
+  .mobile-nav {
+    display: block;
+  }
+
+  .main-content {
+    margin-left: 0;
+    padding-top: calc(#{$mobile-nav-height} + 2rem);
+  }
+}
